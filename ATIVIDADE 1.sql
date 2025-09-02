@@ -1,0 +1,30 @@
+CREATE DATABASE ATIVIDADE
+CREATE TABLE PROJETO (
+    ProjNumero VARCHAR(10) PRIMARY KEY,
+    TipoProj VARCHAR(50),
+    DescProj VARCHAR(100)
+);
+
+CREATE TABLE CATEGORIA (
+    CodCategoria VARCHAR(5) PRIMARY KEY,
+    NomeCategoria VARCHAR(50),
+    ValorRemuneracao DECIMAL(10,2)
+);
+
+CREATE TABLE EMPREGADO (
+    EmpID VARCHAR(10) PRIMARY KEY,
+    EmpNome VARCHAR(50),
+    CodCategoria VARCHAR(5),
+    FOREIGN KEY (CodCategoria) REFERENCES CATEGORIA(CodCategoria)
+);
+
+CREATE TABLE ALOCACAO_PROJETO (
+    ProjNumero VARCHAR(10),
+    EmpID VARCHAR(10),
+    DataInicioAloc DATE,
+    TempoAlocacao INT,
+    PRIMARY KEY (ProjNumero, EmpID),
+    FOREIGN KEY (ProjNumero) REFERENCES PROJETO(ProjNumero),
+    FOREIGN KEY (EmpID) REFERENCES EMPREGADO(EmpID)
+);
+
